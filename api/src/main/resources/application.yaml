@@ -11,3 +11,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root123!@#
+
+token:
+  secret:
+    key:SpringBootJWTHelperTokenSecretKeyValue123!@#
+  access-token:
+    plus-hour: 1 # 1Hour
+  refresh-token:
+    plus-hour: 12 # 12Hour
