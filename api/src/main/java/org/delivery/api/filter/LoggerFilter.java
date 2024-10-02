@@ -24,6 +24,7 @@ public class LoggerFilter implements Filter {
 
         chain.doFilter(req, res);
 
+        // 응답이 나간 후 log 생성
 
         // request 정보
         var headerNames = req.getHeaderNames();
