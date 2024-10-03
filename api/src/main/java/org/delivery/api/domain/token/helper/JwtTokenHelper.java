@@ -7,19 +7,19 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import org.delivery.api.common.error.TokenErrorCode;
 import org.delivery.api.common.exception.ApiException;
-import org.delivery.api.domain.token.ifs.TokenHelper;
+import org.delivery.api.domain.token.ifs.TokenHelperIfs;
 import org.delivery.api.domain.token.model.TokenDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class JwtTokenHelper implements TokenHelper {
+public class JwtTokenHelper implements TokenHelperIfs {
 
     @Value("${token.secret.key}")
     private String secretKey;
@@ -29,7 +29,6 @@ public class JwtTokenHelper implements TokenHelper {
 
     @Value("${token.refresh-token.plus-hour}")
     private Long refreshTokenPlusHour;
-
 
     @Override
     public TokenDto issueAccessToken(Map<String, Object> data) {
@@ -98,7 +97,7 @@ public class JwtTokenHelper implements TokenHelper {
                 throw new ApiException(TokenErrorCode.INVALID_TOKEN, e);
             }
             else if(e instanceof ExpiredJwtException){
-                // 만료된 토큰
+                //  만료된 토큰
                 throw new ApiException(TokenErrorCode.EXPIRED_TOKEN, e);
             }
             else{
